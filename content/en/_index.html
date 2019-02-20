@@ -7,4 +7,223 @@
     "lastmod": "2017-02-01"
 }
 
-<h1 property="name" id="wb-cont">Smart Daily</h1>
+<h1 property="name" id="wb-cont">Smart Daily - Chart Editor</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!-- UI column -->
+        <div class="col-md-4">
+            <!-- Create tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item active">
+                    <a class="nav-link" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="true">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
+                </li>
+            </ul>
+
+            <!-- Create content panels -->
+            <div class="tab-content ui-container" id="tab-content">
+                <!-- Data tab -->
+                <div class="tab-pane fade in active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                    <!--Add/customize data section -->
+                    <div class="section-header"><h3>Add/customize data</h3></div>
+                    <div class="section-content">   
+                        <!-- Chart type -->
+                        <div class="control-container">
+                            <label for="chart-type">Type:</label><br/>
+                            <select id="chart-type" class="control control-update">
+                                <option value="line" selected="selected">Line</option>
+                                <option value="column">Column</option>
+                                <option value="stacked-column">Stacked Column</option>
+                                <option value="bar">Bar</option>
+                                <option value="stacked-bar">Stacked Bar</option>
+                                <option value="pie">Pie</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Latest n periods -->
+                        <div class="control-container">
+                            <label for="latest-n">Latest n periods</label><br/>
+                            <input type="number" id="latest-n" name="latest-n" class="control control-update" value="10" min="0"/> 
+                        </div>
+
+                        <!-- Reference period -->
+                        <div class="control-container">
+                            <label>Reference period</label><br/>
+                            <label for="start-date">From</label>
+                            <input type="date" id="start-date" name="start-date" class="control control-update"/>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            <label for="end-date">To</label>
+                            <input type="date" id="end-date" name="end" class="control control-update"/>  
+                            <span class="glyphicon glyphicon-calendar"></span>  
+                        </div>
+
+                        <!-- Frequency -->
+                        <div class="control-container">
+                            <label for="frequency">Frequency</label><br/>
+                            <select id="frequency" name="frequency" class="control control-update">
+                                <option value="none" selected="selected">Default</option>
+                                <option value="1" disabled>Daily</option>
+                                <option value="2" disabled>Weekly</option>
+                                <option value="6">Monthly</option>
+                                <option value="9" disabled>Quarterly</option>
+                                <option value="12">Annual</option>
+                            </select>
+                        </div>
+
+                        <!-- Add series -->
+                        <div class="control-container">
+                            <button class="btn btn-primary" id="add-series">Add series</button>
+                        </div>
+                    </div>
+
+                    <!-- Series section -->
+                    <div class="section-header"><h3>Series #</h3></div>
+                    <div class="section-content">
+                        <div id="series">
+                            <!-- Content generated at runtime -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details tab -->
+                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <div class="section-content">
+                    <!-- English title -->
+                        <div class="control-container">
+                            <label for="title-en">English title</label><br/>
+                            <input type="text" id="title-en" name="title-en" class="control control-update"/> 
+                        </div>
+                    
+                        <!-- French title -->
+                        <div class="control-container">
+                            <label for="title-fr">French title</label><br/>
+                            <input type="text" id="title-fr" name="title-fr" class="control control-update"/> 
+                        </div>
+
+                        <!-- X-Axis label -->
+                        <div class="control-container">
+                            <label for="x-axis-label">X-Axis label</label><br/>
+                            <input type="text" id="x-axis-label" name="x-axis-label" class="control control-update"/> 
+                        </div>
+                        
+                        <!-- Y-Axis label -->
+                        <div class="control-container">
+                            <label for="y-axis-label">Y-Axis label</label><br/>
+                            <input type="text" id="y-axis-label" name="y-axis-label" class="control control-update"/> 
+                        </div>
+
+                        <!-- Caption -->
+                        <div class="control-container">
+                            <label for="caption">Caption</label><br/>
+                            <textarea id="caption" name="caption" class="control control-update" disabled></textarea>
+                        </div>
+
+                        <!-- Sources -->
+                        <div class="control-container">
+                            <label for="sources">Sources</label><br/>
+                            <textarea id="sources" name="sources" class="control control-update" disabled></textarea>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="control-container">
+                            <label for="notes">Notes</label><br/>
+                            <textarea id="notes" name="notes" class="control control-update" disabled></textarea>
+                        </div>
+
+                        <!-- Add grid -->
+                        <div class="control-container">
+                            <label for="add-grid">Add a grid</label><br/>
+                            <label class="spaced"><input type="radio" id="add-grid" class="control control-update" name="add-grid" checked>Yes</label>
+                            <label class="spaced"><input type="radio" class="control control-update" name="add-grid">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View column -->
+        <div class="col-md-8 view-container">
+            <h2 id="chart-title"></h2>
+            <div id="chart-container">
+                <canvas id="chart-canvas" style="width:100%;"></canvas>
+            </div>
+
+            <div id="table-container"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit series modal -->
+<div class="modal fade" id="edit-series-modal" tabindex="-1" role="dialog" aria-labelledby="edit-series-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="edit-series-modal-label">Edit series</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Edit the properties of the series and select save.</p>
+
+                <!-- Vector expression -->
+                <div class="control-container">
+                    <label for="vexp">Vector expression</label><br/>
+                    <input type="text" id="vexp" name="vexp" class="control"/> 
+                </div>
+
+                <!-- English label -->
+                <div class="control-container">
+                    <label for="label-en">English label</label><br/>
+                    <input type="text" id="label-en" name="label-fr" class="control"/> 
+                </div>
+
+                <!-- French label -->
+                <div class="control-container">
+                    <label for="label-fr">French label</label><br/>
+                    <input type="text" id="label-fr" name="label-fr" class="control"/> 
+                </div>
+
+                <!-- Frequency mode -->
+                <div class="control-container">
+                    <label for="frequency-mode">Frequency mode</label><br/>
+                    <select id="frequency-mode" name="frequency-mode" class="control control-update">
+                        <option value="last" selected="selected">Last period</option>
+                        <option value="sum">Sum</option>
+                        <option value="average">Average</option>
+                    </select>
+                </div>
+
+                <!-- Transformation -->
+                <div class="control-container">
+                    <label for="transformation">Transformation</label><br/>
+                    <select id="transformation" name="transformation" class="control control-update">
+                        <option value="none" selected="selected">None</option>
+                        <option value="pppc">Period to period - % of change</option>
+                        <option value="ppd">Period to period - difference</option>
+                    </select>
+                </div>
+                
+                <!-- Rounding mode -->
+                <div class="control-container">
+                    <label for="round-mode">Rouding mode</label><br/>
+                    <select id="round-mode" name="round-mode" class="control">
+                        <option value="none" selected="selected">None</option>
+                        <option value="default">Default</option>
+                        <option value="bankers">Banker's</option>
+                    </select>
+                </div>
+
+                <!-- Rounding decimals -->
+                <div class="control-container">
+                    <label for="round-decimals">Decimal places</label><br/>
+                    <input type="number" id="round-decimals" name="round-decimals" class="control" min="0"/> 
+                </div>
+
+                <button type="button" id="save-series" class="btn btn-primary">Save</button>
+            </div>  
+        </div>
+    </div>
+</div>
