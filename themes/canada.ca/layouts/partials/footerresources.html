@@ -1,0 +1,12 @@
+
+        {{ `<!--[if gte IE 9 | !IE ]><!-->` | safeHTML }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+        <script src="{{ "/wet-boew/js/wet-boew.min.js" | relURL }}"></script>
+        {{ `<!--<![endif]-->` | safeHTML }}
+        {{ `<!--[if lt IE 9]>` | safeHTML }}
+        <script src="{{ "/wet-boew/js/ie8-wet-boew2.min.js" | relURL }}"></script>
+
+        {{ `<![endif]-->` | safeHTML }}
+        <script src="{{ "/wet-boew/js/theme.min.js" | relURL }}"></script>
+
+        
