@@ -9,7 +9,9 @@
         {{ `<![endif]-->` | safeHTML }}
         <script src="{{ "/wet-boew/js/theme.min.js" | relURL }}"></script>
 
-        {{ `<!-- Add App.js Custom Application Code -->` | safeHTML }}
-        <script src="{{ "/js/app.js" | relURL }}"></script>
+        {{ `<!-- Add main.js and plugins.js Custom Application Code -->` | safeHTML }}
+        <script src="{{ "/js/app/chartmaker-view-controller.js" | relURL }}"></script>
+        <script src="{{ "/js/app/chartmaker-model.js" | relURL }}"></script>
+        <script src="{{ "/js/app/main.js" | relURL }}"></script>
     
         
