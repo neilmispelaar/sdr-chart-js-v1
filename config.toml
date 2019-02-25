@@ -1,9 +1,9 @@
 
-baseURL = "https://uxdc.pages.cloud.statcan.ca/sdr-chart-js-v1"
+baseURL = "https://uxdc.pages.cloud.statcan.ca/chart-generator"
 
 languageCode = "en"
 
-title = "Statistics Canada Daily News Letter Redesign Project"
+title = "Chart Generator Tool"
 
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm", "sitemap"]
 
